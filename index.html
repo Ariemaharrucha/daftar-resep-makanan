@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="" id="add-recipe">
+        <label for="name">Nama makanan : </label>
+
+        <input type="text" id="name" />
+
+        <label for="category">Kategori : </label>
+        <select name="category" id="category">
+          <option value="sarapan">sarapan</option>
+          <option value="makan siang">makan siang</option>
+          <option value="makan malam">makan malam</option>
+        </select>
+
+        <label for="recipe" >Resep makanan : </label>
+        <textarea name="recipe" id="recipe" cols="30" rows="10"></textarea>
+
+        <label for="time_cook">waktu masak :</label>
+
+        <input type="text" id="time_cook" />
+
+        <button type="submit">add</button>
+      </form>
+      <div class="container-recipes">
+        <div class="" id="list-recipes">
+
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

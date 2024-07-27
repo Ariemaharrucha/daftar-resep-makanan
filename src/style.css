@@ -1,0 +1,167 @@
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-
+    
+  }
+
+  .container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 10px; */
+    /* background-color: #646cff; */
+  }
+
+  .container-recipes {
+  grid-column: span 2;
+  height: 100vh ;
+  background-color: rgb(243 244 246);
+  }
+
+  #add-recipe{
+    background-color: white;
+    padding: 10px 20px;
+    border-right: 2px solid #FF5501;
+  }
+
+  #list-recipes {
+    /* width: 100%; */
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  #add-recipe label {
+    font-size: 18px;
+    margin-top: 10px;
+    display:block;
+    color: rgb(109 40 217);
+  }
+
+  #name {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid rgb(109 40 217);
+    font-size: 1em;
+  }
+
+  #time_cook {
+    margin-top: 5px;
+    display: block;
+    width: 40%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid rgb(109 40 217);
+    font-size: 1em;
+  }
+
+  #add-recipe select{
+    margin-top: 5px;
+    display: block;
+    padding:5px;
+    border-radius: 8px;
+    border: 2px solid rgb(109 40 217);
+  }
+
+  #recipe {
+    margin-top: 5px;
+    display: block;
+    border: 2px solid rgb(109 40 217);
+    border-radius: 8px;
+    padding: 5px;
+  }
+
+  #recipe:focus,
+  #name:focus, 
+  #time_cook:focus {
+    outline: none;
+    border-color: rgb(109 40 217); 
+  }
+
+
+  .card {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 20px -3px, rgba(0, 0, 0, 0.1) 0px 6px 10px -2px;
+  }
+  
+  .card .title {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: rgb(109 40 217);
+  }
+  
+  .card .recipes {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .card .times {
+    margin-top: 10px;
+    color: #666;
+  }
+  
+  .card .categories {
+    border: 1px solid #ff8d2a;
+    padding: 8px;
+    background-color: #ff8d2a;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-bottom-left-radius: 5px;
+    font-weight: 600;
+  }
+  
+  .card button:hover {
+    background-color: rgb(90, 30, 197);
+    border-color: #646cff;
+  }
+  
+  #add-recipe button {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  button {
+    color:white;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: rgb(109 40 217);
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  button:hover {
+    border-color: #646cff;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
