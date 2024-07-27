@@ -45,12 +45,16 @@ async function renderRecipes() {
       const target = event.target as HTMLElement;
       console.log(target);
       const btnDelete = target.closest(".btnDelete");
+      const btnEdit = target.closest(".btnDetail")
       if (btnDelete) {
         try {
           await deleteRecipe(target.dataset.id as string);
         } catch (error) {
           console.log(error);
         }
+      } else if (btnEdit) {
+        console.log('tes');
+        
       }
     });
   } catch (error) {
