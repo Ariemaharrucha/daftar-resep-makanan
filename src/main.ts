@@ -7,6 +7,16 @@ interface IRecipeResult {
   data: IRecipe[];
 }
 
+const nameFood = document.getElementById("name") as HTMLInputElement;
+
+nameFood?.addEventListener("input", function () {
+  const value = nameFood.value;
+  if (value.length > 0) {
+    nameFood.value =
+      value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+  }
+});
+
 async function renderRecipes() {
   try {
     const result = await getData<IRecipeResult>(API_URL);
@@ -16,54 +26,37 @@ async function renderRecipes() {
       return;
     }
 
+    const listRecipes = document.getElementById("list-recipes");
+
     result.data.map((food) => {
-      const listRecipes = document.getElementById("list-recipes");
-      const card = document.createElement("div");
-      const bodyRecipe = document.createElement("div");
-      const bodyTimes = document.createElement("div");
+      listRecipes?.insertAdjacentHTML(
+        "beforeend",
+        cardElement(
+          food._id,
+          food.name,
+          food.recipe,
+          food.time_cook,
+          food.category
+        )
+      );
+    });
 
-      const title = document.createElement("p");
-      const recipes = document.createElement("p");
-      const times = document.createElement("span");
-      const categories = document.createElement("p");
-      const btnDelete = document.createElement('button');
-
-      const textRecipe = document.createElement('h5').textContent = 'Resep makanan :';
-      const textTimes = document.createElement('span').textContent = 'Waktu masak :';
-
-      card.classList.add('card');
-      title.classList.add('title');
-      bodyRecipe.classList.add('recipes');
-      bodyTimes.classList.add('times');
-      categories.classList.add('categories');
-      // recipes.classList.add('recipes');
-
-      title.textContent = food.name;
-      recipes.textContent = food.recipe;
-      times.textContent = food.time_cook;
-      categories.textContent = food.category;
-      btnDelete.textContent = 'hapus';
-      btnDelete.dataset.id = food._id;
-
-      btnDelete.addEventListener('click',async function() {
+    listRecipes?.addEventListener("click", async function (event) {
+      const target = event.target as HTMLElement;
+      console.log(target);
+      const btnDelete = target.closest(".btnDelete");
+      if (btnDelete) {
         try {
-          await deleteRecipe(food._id);
-          
+          await deleteRecipe(target.dataset.id as string);
         } catch (error) {
           console.log(error);
-          
         }
-      })
-
-      bodyRecipe.append(textRecipe, recipes)
-      bodyTimes.append(textTimes, times)
-      card.append(title, bodyRecipe , bodyTimes , categories, btnDelete);
-      listRecipes?.appendChild(card);
+      }
     });
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 renderRecipes();
 
@@ -85,12 +78,14 @@ document
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify([{
-          name: name.value,
-          category: category.value,
-          recipe: recipe.value,
-          time_cook: time_cook.value,
-        }]),
+        body: JSON.stringify([
+          {
+            name: name.value,
+            category: category.value,
+            recipe: recipe.value,
+            time_cook: time_cook.value,
+          },
+        ]),
       });
     } catch (error) {
       console.log(error);
@@ -99,18 +94,17 @@ document
     }
   });
 
-
-async function deleteRecipe(id:string) {
-  // console.log(id);
-  if(confirm('apakah anda ingin menghapus resep ini') == true) {
+async function deleteRecipe(id: string) {
+  console.log(id);
+  if (confirm("apakah anda ingin menghapus resep ini") == true) {
     try {
       const res = await fetch(`${API_URL}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify([{id}])
-      });   
+        body: JSON.stringify([{ id }]),
+      });
       if (!res.ok) {
         throw new Error("error");
       }
@@ -123,19 +117,31 @@ async function deleteRecipe(id:string) {
   return;
 }
 
-
-function cardElement(_id: string, name: string, recipe: string, time_cook: string, category: string){
+function cardElement(
+  _id: string,
+  name: string,
+  recipe: string,
+  time_cook: string,
+  category: string
+) {
   return `<div class="card">
   <p class="title">${name}</p>
   <div class="recipes">
-    <h5>Resep makanan :</h5>
+    <h4>Resep makanan :</h4>
     <p>${recipe}</p>
   </div>
-  <div class="times">
-    <span>Waktu memasak :</span>
-    <span>${time_cook}</span>
+  <div class="footer-card">
+    <div class="times">
+      <span>Waktu memasak :</span>
+      <span>${time_cook}</span>
+    </div>
+    <div class="btn-list">
+      <button type="button" class="btnDelete" data-id="${_id}">hapus</button>
+      <button type="button" class="btnDetail" disabled >
+        Cara masak
+      </button>
+    </div>
   </div>
   <div class="categories">${category}</div>
-  <button type="button" dataset-id="${_id}">hapus</button>
-</div>`
-}
+</div>`;
+} 

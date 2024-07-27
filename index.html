@@ -9,33 +9,40 @@
   <body>
     <div class="container">
       <form action="" id="add-recipe">
+        <h1>Tambahkan Resep Makanan</h1>
         <label for="name">Nama makanan : </label>
-
-        <input type="text" id="name" />
-
+        <input type="text" id="name" required />
         <label for="category">Kategori : </label>
         <select name="category" id="category">
           <option value="sarapan">sarapan</option>
           <option value="makan siang">makan siang</option>
           <option value="makan malam">makan malam</option>
         </select>
-
-        <label for="recipe" >Resep makanan : </label>
-        <textarea name="recipe" id="recipe" cols="30" rows="10"></textarea>
-
+        <label for="recipe">Resep makanan : </label>
+        <textarea
+          name="recipe"
+          id="recipe"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
         <label for="time_cook">waktu masak :</label>
-
-        <input type="text" id="time_cook" />
-
+        <input type="text" id="time_cook" required />
         <button type="submit">add</button>
       </form>
       <div class="container-recipes">
-        <div class="" id="list-recipes">
-
-        </div>
+        <h1>Daftar resep makanan</h1>
+        <input
+          type="text"
+          placeholder="Cari resep makanan"
+          class="search-recipe"
+        />
+        <div class="" id="list-recipes"></div>
       </div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+
+
